@@ -8,9 +8,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 {% endblock %}
 
-<div class="fotorama">
+<div class="fotorama" data-nav="thumbs">
     {% for image in images %}
         <img src="{{ image.image.url }}" alt="{{ image.description }}" data-caption="{{ image.description }}">
     {% endfor %}
 </div>
+
+<!-- Initialize Fotorama after all resources have been loaded -->
+<script>
+    $(document).ready(function () {
+        $('.fotorama').fotorama();
+    });
+</script>
+
 {% endspaceless %}
