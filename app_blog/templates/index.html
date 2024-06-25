@@ -13,11 +13,11 @@
         {% if categories %}
         <div class="row">
             {% for item in categories %}
-                <div class="col-md-4 mb-3">
+                <div class="col-md-2 mb-3">
                     <div class="card bg-dark text-white">
                         <div class="card-body text-center">
                             <a href="{{ item.get_absolute_url }}" class="text-white">
-                                <h4 class="card-title mb-0">{{ item.category }}</h4>
+                                <h5 class="card-title mb-0" style="white-space:nowrap;">{{ item.category }}</h5>
                             </a>
                         </div>
                     </div>

@@ -1,32 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <title>Публікації</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    Публікації <br/>
+    <div class="container mt-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Головна</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'articles-list' %}">Публікації</a></li>
+        </ol>
+        <h1 class="mb-4">Публікації</h1>
 
-    {% if category %} 
-        {{ category }} 
-    {% endif %}
+        {% if category %} 
+            <h2>{{ category }}</h2>
+        {% endif %}
 
-    {% for item in items %}
-        <div class="articles-row">
-            <a href="{{ item.get_absolute_url }}">
-                <h4>{{ item.title }}</h4>
-            </a>
-            <h5>
-                {{ item.pub_date|date:"j E Y"|safe|linebreaks }}
-            </h5>
-            <p>
-                {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
-            </p>
-            <div class="container-image">
-                <img class="img" src="{{ item.images.all.0.image.url }}" alt="" />
-            </div>
-            <div class='clearfix'></div>
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-dark text-white h-100">
+                        <div class="card-body">
+                            <a href="{{ item.get_absolute_url }}" class="text-white">
+                                <h4 class="card-title">{{ item.title }}</h4>
+                            </a>
+                            <h5 class="card-subtitle mb-2 text-muted">
+                                {{ item.pub_date|date:"j E Y"|safe|linebreaks }}
+                            </h5>
+                            <p class="card-text">
+                                {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
+                            </p>
+                            <div class="container-image">
+                                <img class="img-fluid" src="{{ item.images.all.0.image.url }}" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
